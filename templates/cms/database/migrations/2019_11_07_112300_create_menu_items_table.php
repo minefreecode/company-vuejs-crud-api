@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTasksTable extends Migration
+class CreateMenuItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('menu_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 200)->unique();
+            $table->string('text');
+            $table->string('path');
+            $table->integer('parent_menu_item_id')->unsigned()->nullable();
+            $table->foreign('parent_menu_item_id')->references('id')->on('menu_items')->onDelete('cascade');;
+            $table->integer('order')->unsigned()->nullable();
             $table->boolean('active')->default(true);
-            $table->string('description')->nullable();
-            $table->timestamps();
         });
     }
 
@@ -29,6 +31,6 @@ class CreateTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        //
     }
 }
