@@ -5,6 +5,11 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
+/**
+ * Для генерации паролей
+ * Class HashPassword
+ * @package App\Console\Commands
+ */
 class HashPassword extends Command
 {
     protected $signature = 'hash-password {password}';
