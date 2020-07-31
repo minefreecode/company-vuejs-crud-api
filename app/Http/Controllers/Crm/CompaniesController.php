@@ -10,6 +10,7 @@ class CompaniesController extends Controller
 {
     public function __construct()
     {
+        //Middleware для проверки досупа по ролям
         $this->middleware('role:read', ['only' => ['index', 'show']]);
         $this->middleware('role:insert', ['only' => ['store']]);
         $this->middleware('role:update', ['only' => ['update', 'multipleUpdate']]);
