@@ -1,5 +1,5 @@
 ## О проекте
-Это API бекенда для проекта `https://github.com/avpavlow/vuejs-crud`, написанной на Laravel
+Это API бекенда для проекта `https://github.com/avpavlow/company-vuejs-crud`, написанной на Laravel
 
 # Что интересного в проекте
 1. Генерация роутов `CRUD` из ресурсных файлов `app/Resources/CRUD.php`. В ресурсных файлах имеется класс CRUD с переменной `$resources` ,
