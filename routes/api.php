@@ -26,6 +26,12 @@ Route::post('/demo/tasks/multiple-update', ['uses' => 'Demo\TasksController@mult
 Route::post('/demo/tasks/multiple-delete', ['uses' => 'Demo\TasksController@multipleDelete']);
 Route::post('/demo/tasks/multiple-add', ['uses' => 'Demo\TasksController@multipleAdd']);
 
+
+Route::apiResource('/contribution/user_contributions', 'Contribution\UserContributionsController');
+Route::post('/contribution/user_contributions/multiple-update', ['uses' => 'Contribution\UserContributionsController@multipleUpdate']);
+Route::post('/contribution/user_contributions/multiple-delete', ['uses' => 'Contribution\UserContributionsController@multipleDelete']);
+Route::post('/contribution/user_contributions/multiple-add', ['uses' => 'Contribution\UserContributionsController@multipleAdd']);
+
 // Custom CRUD operations
 
 //  Middleware - authentication

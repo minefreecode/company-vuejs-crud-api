@@ -13,11 +13,11 @@ class PeopleSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-    	foreach (range(1,3000) as $index) {
+    	foreach (range(1,300) as $index) {
             $sex = $faker->randomElement(['male', 'female']);
 	        DB::table('people')->insert([
                 'firstname' => $faker->firstName($sex),
-                'lastname' => $faker->lastName,
+                'lastname' => $faker->lastName . $faker->randomLetter,
                 'distinction' => $faker->suffix,
                 'sex_id' => $sex == 'male' ? 2 : 3,
                 'language_id' => 2,
