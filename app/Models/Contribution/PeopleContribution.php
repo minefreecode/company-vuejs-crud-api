@@ -3,27 +3,28 @@
 namespace App\Models\Contribution;
 
 use App\Models\Admin\User;
+use App\Models\Crm\Person;
 use Illuminate\Database\Eloquent\Model;
 
-class UserContribution extends Model
+class PeopleContribution extends Model
 {
-    public $table = 'user_contributions';
+    public $table = 'people_contributions';
 
     protected $fillable = [
         'title',
         'description',
-        'user_id',
+        'people_id',
     ];
     
     public static $validator = [
         'title' => 'required|string|max:50',
         'description' => 'string|max:255',
-        'user_id' => 'required|exists:users,id',
+        'people_id' => 'required|exists:people,id',
     ];
 
 
     public function user()
     {
-        return $this->belongsTo(User::class)->orderBy('id');
+        return $this->belongsTo(Person::class)->orderBy('id');
     }
 }

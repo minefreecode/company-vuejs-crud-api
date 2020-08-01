@@ -1,5 +1,5 @@
 <?php
-use App\Models\Contribution\UserContribution;
+use App\Models\Contribution\PeopleContribution;
 use Faker\Generator as Faker;
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +13,10 @@ use Faker\Generator as Faker;
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(UserContribution::class, function (Faker $faker) {
+$factory->define(PeopleContribution::class, function (Faker $faker) {
     return [
         'title' => $faker->title,
         'description' => $faker->text(255),
-        'user_id' => 1,
+        'people_id' => rand(1, 200),
     ];
 });

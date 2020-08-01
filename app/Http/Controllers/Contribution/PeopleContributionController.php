@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Demo;
 
-use App\Models\Contribution\UserContribution;
+use App\Models\Contribution\PeopleContribution;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UserContributionController extends Controller
+class PeopleContributionController extends Controller
 {
 
-    private $m = UserContribution::class;
+    private $m = PeopleContribution::class;
     private $pk = 'id';
 
     public function index()
     {
-        return UserContribution::all();
+        return PeopleContribution::all();
     }
     public function store(Request $request)
     {
@@ -22,16 +22,16 @@ class UserContributionController extends Controller
     }
     public function show($id)
     {
-        return UserContribution::where('id', $id)->first();
+        return PeopleContribution::where('id', $id)->first();
     }
     public function update(Request $request, $id)
     {
-        $model = UserContribution::where('id', $id)->first();
+        $model = PeopleContribution::where('id', $id)->first();
         return $this->rUpdate($this->m, $model, $request->all(), $this->pk);
     }
     public function destroy($id)
     {
-        $model = UserContribution::where('id', $id)->first();
+        $model = PeopleContribution::where('id', $id)->first();
         return $this->rDestroy($model);
     }
     public function multipleUpdate(Request $request)

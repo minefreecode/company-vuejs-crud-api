@@ -8,7 +8,7 @@ class CompaniesSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-    	foreach (range(1,100) as $index) {
+    	foreach (range(1,210) as $index) {
             $company = $faker->company;
 	        DB::table('companies')->insert([
                 'name' => $company,

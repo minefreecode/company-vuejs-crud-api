@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Contribution\UserContribution;
+use App\Models\Contribution\PeopleContribution;
 class UserContributionsSeeder extends Seeder
 {
     public function run()
     {
-        factory(UserContribution::class, 10)->create();
+        factory(PeopleContribution::class, 10)->create();
     }
 }
