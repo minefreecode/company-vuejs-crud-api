@@ -60,13 +60,20 @@ class InitSeeder extends Seeder
                 'name' => 'administracja',
                 'code' => 'ADMIN',
                 'path' => 'admin'
+            ],
+            [
+                'name' => 'contribution',
+                'code' => 'CONTRIB',
+                'path' => 'contrib'
             ]
+
         ]);
 
         DB::table('user_permissions')
         ->insert([
             ['user_id' => 1,'permission_id' => 1],
-            ['user_id' => 1,'permission_id' => 2]
+            ['user_id' => 1,'permission_id' => 2],
+            ['user_id' => 1,'permission_id' => 3]
         ]);
 
         DB::table('company_types')
