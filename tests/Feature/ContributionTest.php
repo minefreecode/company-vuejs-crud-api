@@ -6,86 +6,92 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\Models\Admin\User;
+use App\Models\Contribution\PeopleContribution;
 
 class ContributionTest extends TestCase
 {
+    private $token;
+
+    /**
+     * Default preparation for each test
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        //Авторизация
+        $response = $this->post('api/auth/login', [
+            'email' => 'admin@admin.ru',
+            'password' => '1234',
+        ]);
+
+        $this->token = $response->getData()->token;
+    }
+
+
+
     public function testsContributionAreCreatedCorrectly()
     {
-        $user = factory(User::class)->create();
-        $token = $user->generateToken();
-        $headers = ['Authorization' => "Bearer $token"];
+        $headers = ['Authorization' => "Bearer $this->token"];
         $payload = [
             'title' => 'Lorem',
-            'body' => 'Ipsum',
+            'description' => 'Ipsum',
+            'people_id' => rand(1, 200)
         ];
 
-        $this->json('POST', '/api/Contribution', $payload, $headers)
+        $this->json('POST', 'api/contribution/people_contributions', $payload, $headers)
             ->assertStatus(200)
-            ->assertJson(['id' => 1, 'title' => 'Lorem', 'body' => 'Ipsum']);
-    }
-
-    public function testsContributionAreUpdatedCorrectly()
-    {
-        $user = factory(User::class)->create();
-        $token = $user->generateToken();
-        $headers = ['Authorization' => "Bearer $token"];
-        $Contribution = factory(Contribution::class)->create([
-            'title' => 'First Contribution',
-            'body' => 'First Body',
-        ]);
-
-        $payload = [
-            'title' => 'Lorem',
-            'body' => 'Ipsum',
-        ];
-
-        $response = $this->json('PUT', '/api/Contribution/' . $Contribution->id, $payload, $headers)
-            ->assertStatus(200)
-            ->assertJson([
-                'id' => 1,
-                'title' => 'Lorem',
-                'body' => 'Ipsum'
-            ]);
-    }
-
-    public function testsContributionAreDeletedCorrectly()
-    {
-        $user = factory(User::class)->create();
-        $token = $user->generateToken();
-        $headers = ['Authorization' => "Bearer $token"];
-        $Contribution = factory(Contribution::class)->create([
-            'title' => 'First Contribution',
-            'body' => 'First Body',
-        ]);
-
-        $this->json('DELETE', '/api/Contribution/' . $Contribution->id, [], $headers)
-            ->assertStatus(204);
-    }
-
-    public function testContributionAreListedCorrectly()
-    {
-        factory(Contribution::class)->create([
-            'title' => 'First Contribution',
-            'body' => 'First Body'
-        ]);
-
-        factory(Contribution::class)->create([
-            'title' => 'Second Contribution',
-            'body' => 'Second Body'
-        ]);
-
-        $user = factory(User::class)->create();
-        $token = $user->generateToken();
-        $headers = ['Authorization' => "Bearer $token"];
-
-        $response = $this->json('GET', '/api/Contribution', [], $headers)
-            ->assertStatus(200)
-            ->assertJson([
-                [ 'title' => 'First Contribution', 'body' => 'First Body' ],
-                [ 'title' => 'Second Contribution', 'body' => 'Second Body' ]
-            ])
             ->assertJsonStructure([
-                '*' => ['id', 'body', 'title', 'created_at', 'updated_at'],
+                'status',
+                'id'
+            ])->assertJson([
+                'status' => 0
             ]);
     }
+
+
+
+        public function testsContributionAreUpdatedCorrectly()
+        {
+            $headers = ['Authorization' => "Bearer $this->token"];
+
+            $Contribution = factory(PeopleContribution::class)->create([
+                'title' => 'First Contribution',
+                'description' => 'Ipsum',
+                'people_id' => rand(1, 200)
+            ]);
+
+            $payload = [
+                'title' => 'Lorem',
+                'description' => 'Ipsum',
+            ];
+
+            $response = $this->json('PUT', 'api/contribution/people_contributions/' . $Contribution->id, $payload, $headers)
+                ->assertStatus(200)
+                ->assertJsonStructure([
+                    'status',
+                    'id'
+                ])
+                ->assertJson([
+                    'status' => 0
+                ]);
+        }
+
+        public function testsContributionAreDeletedCorrectly()
+        {
+            $headers = ['Authorization' => "Bearer $this->token"];
+            $Contribution = factory(PeopleContribution::class)->create([
+                'title' => 'First Contribution',
+                'description' => 'Ipsum',
+                'people_id' => rand(1, 200)
+            ]);
+
+            $this->json('DELETE', 'api/contribution/people_contributions/' . $Contribution->id, [], $headers)
+                ->assertStatus(200)
+                ->assertJson([
+                    'status' => 0
+                ]);
+        }
+
 }

@@ -5,7 +5,7 @@ use App\Resources\CRUD;
 // Authentication and modifying authenticated user
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 
-    //Route::post('/register', ['uses' => 'AuthController@register','as' => 'auth.register']);
+    Route::post('/register', ['uses' => 'AuthController@register','as' => 'auth.register']);
     Route::post('/login', ['uses' => 'AuthController@login', 'as' => 'auth.login']);
     Route::post('/logout', ['uses' => 'AuthController@logout', 'as' => 'auth.logout']);
 
@@ -27,10 +27,10 @@ Route::post('/demo/tasks/multiple-delete', ['uses' => 'Demo\TasksController@mult
 Route::post('/demo/tasks/multiple-add', ['uses' => 'Demo\TasksController@multipleAdd']);
 
 
-Route::apiResource('/contribution/user_contributions', 'Contribution\UserContributionsController');
-Route::post('/contribution/user_contributions/multiple-update', ['uses' => 'Contribution\UserContributionsController@multipleUpdate']);
-Route::post('/contribution/user_contributions/multiple-delete', ['uses' => 'Contribution\UserContributionsController@multipleDelete']);
-Route::post('/contribution/user_contributions/multiple-add', ['uses' => 'Contribution\UserContributionsController@multipleAdd']);
+Route::apiResource('/contribution/people_contributions', 'Contribution\PeopleContributionController');
+Route::post('/contribution/people_contributions/multiple-update', ['uses' => 'Contribution\PeopleContributionController@multipleUpdate']);
+Route::post('/contribution/people_contributions/multiple-delete', ['uses' => 'Contribution\PeopleContributionController@multipleDelete']);
+Route::post('/contribution/people_contributions/multiple-add', ['uses' => 'Contribution\PeopleContributionController@multipleAdd']);
 
 // Custom CRUD operations
 

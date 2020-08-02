@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Demo;
+namespace App\Http\Controllers\Contribution;
 
 use App\Models\Contribution\PeopleContribution;
 use Illuminate\Http\Request;
