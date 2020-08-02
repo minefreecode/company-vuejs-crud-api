@@ -44,7 +44,10 @@
     ```
     php artisan migrate
     ```
-9. Выполните seeders
+9. Выполните заливку данных по команде 
+    ```
+    php artisan db:seed 
+   ```
 10. Для запуска сервера:
     ```
     php artisan serve

@@ -13,7 +13,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\LoadTemplate::class,
         Commands\HashPassword::class,
     ];
 

@@ -1,5 +1,6 @@
 <?php
-
+use App\Models\Contribution\PeopleContribution;
+use Faker\Generator as Faker;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -12,14 +13,10 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\Admin\User::class, function (Faker\Generator $faker) {
-    static $password;
-
+$factory->define(PeopleContribution::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
-        'user_type_id' => 3
+        'title' => $faker->title,
+        'description' => $faker->text(255),
+        'people_id' => rand(1, 200),
     ];
 });

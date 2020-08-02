@@ -43,8 +43,7 @@ class InitSeeder extends Seeder
         ->insert([
             [
                 'name' => 'admin',
-                'email' => 'exit
-                ',
+                'email' => 'admin@admin.ru',
                 'password' => bcrypt('1234'),
                 'user_type_id' => 3
             ]
