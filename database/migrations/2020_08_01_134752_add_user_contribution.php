@@ -19,6 +19,7 @@ class AddUserContribution extends Migration
             $table->string('description', 255)->nullable();
             $table->integer('people_id')->unsigned();
             $table->foreign('people_id')->references('id')->on('people');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

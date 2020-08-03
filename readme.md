@@ -52,3 +52,4 @@
     ```
     php artisan serve
     ```
+11. Логин для входа: `admin@admin.ru`, пароль : `1234`

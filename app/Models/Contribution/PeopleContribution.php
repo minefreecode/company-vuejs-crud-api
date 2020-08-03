@@ -14,12 +14,14 @@ class PeopleContribution extends Model
         'title',
         'description',
         'people_id',
+        'active'
     ];
     
     public static $validator = [
         'title' => 'required|string|max:50',
         'description' => 'string|max:255',
         'people_id' => 'required|exists:people,id',
+        'active' => 'boolean'
     ];
 
 
